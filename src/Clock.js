@@ -1,4 +1,5 @@
 const React = require('react');
+const New = require('./New');
 
 module.exports = class Clock extends React.Component {
   constructor() {
@@ -20,6 +21,6 @@ module.exports = class Clock extends React.Component {
   }
 
   render() {
-    return React.createElement('p', null, String(this.state.time));
+    return (<div><p>{this.state.time}</p><New/></div>);
   }
 };
