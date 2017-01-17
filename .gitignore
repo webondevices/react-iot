@@ -1,2 +1,3 @@
 *.log
 components/
+node_modules/
