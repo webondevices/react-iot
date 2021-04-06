@@ -1,5 +1,8 @@
 # react-iot
+
 Server-side React for IoT projects
+
+Node version: v14.16.0
 
 In the finished application the real-world electronic sensors update the React component’s state as soon as they receive new readings. Then in the render function the LED component, using the newly updated state, works out whether it needs to switch on or off.
 

@@ -1,8 +1,7 @@
 {
-  "name": "react-server-process",
-  "version": "1.0.0",
+  "name": "react-iot",
+  "version": "1.1.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel src --out-dir components && node index.js"
@@ -10,17 +9,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.14.0",
-    "johnny-five": "^0.10.6",
-    "react": "^15.4.0",
-    "react-test-renderer": "^15.4.0"
-  },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-plugin-transform-react-jsx": "^6.8.0",
-    "eslint": "^3.10.2",
-    "eslint-config-airbnb-base": "^10.0.1",
-    "eslint-plugin-import": "^2.2.0"
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "express": "^4.17.1",
+    "johnny-five": "^2.0.0",
+    "react": "^17.0.2",
+    "react-test-renderer": "^17.0.2"
   }
 }
