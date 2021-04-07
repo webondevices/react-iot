@@ -1,20 +1,23 @@
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 import five from "johnny-five";
 
-class Led extends React.Component {
-  constructor(props) {
-    super(props);
-    this._ledInstance = new five.Led(this.props.pin);
-  }
+const Led = ({ pin, poweredOn }) => {
+  const [ledInstance] = useState(() => new five.Led(pin));
+  const ledRef = useRef(ledInstance);
 
-  render() {
-    if (this.props.on) {
-      this._ledInstance.on();
+  useEffect(() => {
+    ledRef.current = new five.Led(pin);
+  }, [pin]);
+
+  useEffect(() => {
+    if (poweredOn) {
+      ledRef.current.on();
     } else {
-      this._ledInstance.off();
+      ledRef.current.off();
     }
-    return <div>Led</div>;
-  }
-}
+  }, [poweredOn]);
+
+  return null;
+};
 
 export default Led;
