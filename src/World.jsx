@@ -1,47 +1,29 @@
-const React = require('react');
-const five = require('johnny-five');
+import React, { useState, useRef, useEffect } from "react";
+import five from "johnny-five";
+import Led from "./Led.js";
+import Sensor from "./Sensor.js";
 
-const Led = require('./Led');
-const LightSensor = require('./LightSensor');
-const MoistureSensor = require('./MoistureSensor');
+const World = () => {
+  const [arduinoInstance] = useState(() => new five.Board());
+  const arduinoRef = useRef(arduinoInstance);
 
-module.exports = class World extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      ready: false,
-      light: 0,
-      moisture: 0
-    }
+  const [isReady, setIsReady] = useState(false);
+  const [lightLevel, setLightLevel] = useState(0);
 
-    // Initialise arduino for this World
-    const arduino = new five.Board();
-    arduino.on('ready', () => this.setState({ready: true}));
+  useEffect(() => {
+    arduinoRef.current.on("ready", () => {
+      setIsReady(true);
+    });
+  }, []);
 
-    this._update = this._update.bind(this);
-  }
-
-  _update(state, value) {
-    this.setState({[state]: value});
-  }
-
-  render() {
-    let worldElements = '';
-
-    if (this.state.ready) {
-      worldElements =
-        <div>
-          <Led pin={2} on={this.state.moisture > 500}/>
-          <Led pin={4} on={this.state.light < 130}/>
-          <LightSensor pin={'A1'} update={this._update}/>
-          <MoistureSensor pin={'A2'} update={this._update}/>
-        </div>;
-    }
-
-    return (
-      <div>
-        {worldElements}
-      </div>
-    );
-  }
+  return (
+    isReady && (
+      <React.Fragment>
+        <Led pin="6" poweredOn={lightLevel < 150} />
+        <Sensor pin="A0" onChange={setLightLevel} />
+      </React.Fragment>
+    )
+  );
 };
+
+export default World;
