@@ -9,7 +9,6 @@ const World = () => {
 
   const [isReady, setIsReady] = useState(false);
   const [lightLevel, setLightLevel] = useState(0);
-  const [moistureLevel, setMoistureLevel] = useState(0);
 
   useEffect(() => {
     arduinoRef.current.on("ready", () => {
@@ -17,19 +16,13 @@ const World = () => {
     });
   }, []);
 
-  console.log(lightLevel, moistureLevel);
-
   return (
-    <div>
-      {isReady && (
-        <div>
-          <Led pin="5" poweredOn={moistureLevel > 1000} />
-          <Led pin="6" poweredOn={lightLevel < 100} />
-          <Sensor pin="A0" onChange={setLightLevel} />
-          <Sensor pin="A1" onChange={setMoistureLevel} />
-        </div>
-      )}
-    </div>
+    isReady && (
+      <React.Fragment>
+        <Led pin="6" poweredOn={lightLevel < 150} />
+        <Sensor pin="A0" onChange={setLightLevel} />
+      </React.Fragment>
+    )
   );
 };
 

@@ -4,7 +4,7 @@ import five from "johnny-five";
 const LightSensor = ({ pin, onChange }) => {
   const sensorSettings = {
     pin,
-    freq: 1000,
+    freq: 250,
   };
   const [sensorInstance] = useState(() => new five.Sensor(sensorSettings));
   const sensorRef = useRef(sensorInstance);
